@@ -63,10 +63,242 @@ var testimonialsSwiper = new Swiper('.testimonials_container_swiper', {
     speed: 1200,
 });
 
+// function whatHeight() {
+//     console.log('отступ от верха документа до верха window ', window.pageYOffset); 
+//     console.log('высота окна window', document.documentElement.clientHeight); 
+//     console.log('макс высота документа ', document.documentElement.scrollHeight);
+//     console.log('отступ от верха window относительно элемента низа элемента', document.querySelector('.chart_section').getBoundingClientRect().bottom);
+//     console.log('расстояние до низа элемента относительно начала document ', document.querySelector('.chart_section').getBoundingClientRect().bottom + window.pageYOffset);
+//     console.log('орицательное значение когда низ window достиг низа элемента', document.querySelector('.chart_section').getBoundingClientRect().bottom - document.documentElement.clientHeight);
+//     console.log('false когда скролл в конце страницы, желательно делать -1px, для лучшей кроссбраузерности', window.pageYOffset + document.documentElement.clientHeight < document.documentElement.scrollHeight - 1); //  
+
+// }
+// addEventListener('resize', () => {
+//     console.clear();
+//     whatHeight();
+//     if ((document.querySelector('.chart_section').getBoundingClientRect().bottom - document.documentElement.clientHeight) < 0) {
+//         console.log('hi')
+//     }
+// })
+// addEventListener('scroll', () => {
+//     console.clear();
+//     whatHeight();
+//     if ((document.querySelector('.chart_section').getBoundingClientRect().bottom - document.documentElement.clientHeight) < 0) {
+//         console.log('hi')
+//     }
+// })
+let customersLoad = false,
+    planSectionLoad = true,
+    aboutUsLoad = true,
+    statsLoad = true,
+    blogLoad = true,
+    quotesLoad = true,
+    faqLoad = true,
+    getStarterLoad = true,
+    newsletterLoad = true,
+    footerLoad = true,
+    disableScrollListener = false;
+
+document.addEventListener('scroll', function scrollListener(e) {
+    loadContent()
+    console.log(1);
+    if (disableScrollListener) {
+        this.removeEventListener(e.type, scrollListener);
+        
+    }
+})
+
+console.log(document.querySelector('.chart_section').getBoundingClientRect().bottom - document.documentElement.clientHeight);
+function loadContent() {
+        
+    customersRender();
+
+    planSectionRender();
+
+    aboutUsRender();
+
+    statsRender();
+
+    blogRender();
+
+    quotesRender();
+
+    faqRender();
+
+    getStarterRender();
+
+    newsletterRender();
+
+    footerRender()
+}
+//     p.then((r) => {
+//         setTimeout(() => {
+//             console.log(r);
+//         if ((!planSectionLoad) && (document.querySelector('.customers_section').getBoundingClientRect().bottom - document.documentElement.clientHeight) < 0) {
+//             let html = `
+//                         <div class="plan_container">
+//                         <div class="plan_text_container">
+//                             <p class="sub_h_text">
+//                                 DESKTOP AND MOBILE APP
+//                             </p>
+//                             <h2 class="plan_h2">
+//                                 Plan <span> and </span> manage
+//                             </h2>
+//                             <p class="main_text">
+//                                 Brute laoreet efficiendi id his, ea illum nonumes luptatum pro. Usu atqui laudem an, insolens gubergren similique est cu. Et vel modus congue vituperata. Solum patrioque no sea. Mea ex malis mollis oporteat. Eum an expetenda consequat.
+//                             </p>
+//                             <div class="bot_buttons">
+//                                 <a class="plan_video_button button">
+//                                     <span>View video</span>
+//                                     <svg width="7" height="8" viewBox="0 0 7 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                                         <path d="M6 2.73354C6.66667 3.11844 6.66667 4.08069 6 4.46559L1.5 7.06367C0.833333 7.44857 0 6.96744 0 6.19764V1.00149C0 0.231691 0.833333 -0.249434 1.5 0.135467L6 2.73354Z" fill="white"/>
+//                                     </svg>
+//                                 </a>
+//                                 <a class="plan_features_button button">
+//                                     <span>See features</span>
+//                                 </a>
+//                             </div>
+//                         </div>
+//                         <div class="plan_illustrations_container">
+//                             <div class="plan_illustration_container_mobile1">
+//                                 <picture>
+//                                     <source srcset="img/Phone_app_1x.jpg 1x, 
+//                                     img/Phone_app_2x.jpg 2x, 
+//                                     img/Phone_app_3x.jpg 3x, ">
+//                                     <img src="img/Phone_app_1x.jpg" alt="">
+//                                 </picture>
+//                             </div>
+//                             <div class="plan_illustration_container_mobile2">
+//                                 <picture>
+//                                     <source srcset="img/large_phone_app_1x.png 1x, 
+//                                     img/large_phone_app_2x.png 2x, 
+//                                     img/large_phone_app_3x.png 3x, ">
+//                                     <img src="img/large_phone_app_1x.png" alt="">
+//                                 </picture>
+//                             </div>
+//                             <div class="plan_illustration_container_desktop">
+//                                 <picture>
+//                                     <source srcset="img/desctop_app_1x.jpg 1x, 
+//                                     img/desctop_app_2x.jpg 2x, 
+//                                     img/desctop_app_3x.jpg 3x, ">
+//                                     <img src="img/desctop_app_1x.jpg" alt="">
+//                                     <span></span>
+//                                 </picture>
+//                             </div>
+//                         </div>
+//                     </div>
+                
+//             `;
+//             document.querySelector('.plan_section').innerHTML = html;
+//             document.querySelector('.plan_section').insertAdjacentHTML("afterend", 
+//             `
+//             <section class="about-us_section">
+//                 <img src="spinner.svg" alt="">
+//             </section>
+//             `)
+//             planSectionLoad = true;
+//             return 555;
+//         }
+//         }, 2000);
+        
+//     })
+//     .then((r) => {
+//         setTimeout(() => {
+//             console.log(r);
+//         if ((!planSectionLoad) && (document.querySelector('.customers_section').getBoundingClientRect().bottom - document.documentElement.clientHeight) < 0) {
+//             let html = `
+//                         <div class="plan_container">
+//                         <div class="plan_text_container">
+//                             <p class="sub_h_text">
+//                                 DESKTOP AND MOBILE APP
+//                             </p>
+//                             <h2 class="plan_h2">
+//                                 Plan <span> and </span> manage
+//                             </h2>
+//                             <p class="main_text">
+//                                 Brute laoreet efficiendi id his, ea illum nonumes luptatum pro. Usu atqui laudem an, insolens gubergren similique est cu. Et vel modus congue vituperata. Solum patrioque no sea. Mea ex malis mollis oporteat. Eum an expetenda consequat.
+//                             </p>
+//                             <div class="bot_buttons">
+//                                 <a class="plan_video_button button">
+//                                     <span>View video</span>
+//                                     <svg width="7" height="8" viewBox="0 0 7 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+//                                         <path d="M6 2.73354C6.66667 3.11844 6.66667 4.08069 6 4.46559L1.5 7.06367C0.833333 7.44857 0 6.96744 0 6.19764V1.00149C0 0.231691 0.833333 -0.249434 1.5 0.135467L6 2.73354Z" fill="white"/>
+//                                     </svg>
+//                                 </a>
+//                                 <a class="plan_features_button button">
+//                                     <span>See features</span>
+//                                 </a>
+//                             </div>
+//                         </div>
+//                         <div class="plan_illustrations_container">
+//                             <div class="plan_illustration_container_mobile1">
+//                                 <picture>
+//                                     <source srcset="img/Phone_app_1x.jpg 1x, 
+//                                     img/Phone_app_2x.jpg 2x, 
+//                                     img/Phone_app_3x.jpg 3x, ">
+//                                     <img src="img/Phone_app_1x.jpg" alt="">
+//                                 </picture>
+//                             </div>
+//                             <div class="plan_illustration_container_mobile2">
+//                                 <picture>
+//                                     <source srcset="img/large_phone_app_1x.png 1x, 
+//                                     img/large_phone_app_2x.png 2x, 
+//                                     img/large_phone_app_3x.png 3x, ">
+//                                     <img src="img/large_phone_app_1x.png" alt="">
+//                                 </picture>
+//                             </div>
+//                             <div class="plan_illustration_container_desktop">
+//                                 <picture>
+//                                     <source srcset="img/desctop_app_1x.jpg 1x, 
+//                                     img/desctop_app_2x.jpg 2x, 
+//                                     img/desctop_app_3x.jpg 3x, ">
+//                                     <img src="img/desctop_app_1x.jpg" alt="">
+//                                     <span></span>
+//                                 </picture>
+//                             </div>
+//                         </div>
+//                     </div>
+                
+//             `;
+//             document.querySelector('.plan_section').innerHTML = html;
+//             document.querySelector('.plan_section').insertAdjacentHTML("afterend", 
+//             `
+//             <section class="about-us_section">
+//                 <img src="spinner.svg" alt="">
+//             </section>
+//             `)
+//             planSectionLoad1 = true;
+//             r(555)
+//         }
+//         }, 2000);
+        
+//     })
+// }
 
 
 
+loadContent()
 
+
+// function whatHeight() {
+//     console.log('отступ от верха документа до верха window ', window.pageYOffset); 
+//     console.log('высота окна window', document.documentElement.clientHeight); 
+//     console.log('макс высота документа ', document.documentElement.scrollHeight);
+//     console.log('отступ от верха window относительно элемента верха элемента', document.querySelector('.customers_section').getBoundingClientRect().top);
+//     console.log('расстояние до верха элемента относительно начала document ', document.querySelector('.customers_section').getBoundingClientRect().top + window.pageYOffset);
+//     console.log('орицательное значение когда низ window достиг верха элемента', document.querySelector('.customers_section').getBoundingClientRect().bottom - document.documentElement.clientHeight);
+//     console.log('false когда скролл в конце страницы, желательно делать -1px, для лучшей кроссбраузерности', window.pageYOffset + document.documentElement.clientHeight < document.documentElement.scrollHeight - 1); //  
+
+// }
+// addEventListener('resize', () => {
+//     console.clear();
+//     whatHeight();
+// })
+// addEventListener('scroll', () => {
+//     console.clear();
+//     whatHeight();
+    
+// })
 
 
 
@@ -90,111 +322,3 @@ document.querySelectorAll('.header_burger').forEach(item => {item.addEventListen
 })});
 
 
-
-
-var swiperButtons = document.querySelectorAll('.swiper-button-next, .swiper-button-prev');
-swiperButtons.forEach(item => {
-    item.addEventListener("click", function() {
-        blogSwiper.updateAutoHeight(200);
-    });
-});
-
-
-
-var testimonialsSwiperSpeed = document.querySelector('#testimonials_swiper');
-
-testimonialsSwiperSpeed.addEventListener("mouseover", function () {
-    testimonialsSwiper.autoplay.stop();
-    testimonialsSwiper.params.speed = 300;
-});
-testimonialsSwiperSpeed.addEventListener("mouseout", function () {
-    testimonialsSwiper.autoplay.start();
-    testimonialsSwiper.params.speed = 1200;
-});
-
-
-const spoilerContainer = document.querySelectorAll("[data-name='spoiler-container']");
-
-// перебор коробок спойлеров, для поиска названий спойлеров в них
-spoilerContainer.forEach(function (item) { 
-    var header = item.querySelectorAll("[data-name='spoiler-title']");
-    // проверка на наличие нескольких названий в коробке 
-    header.forEach(function (headerItem) {
-        // запуск функции при клике на любой тайтл в коробке
-        headerItem.addEventListener("click", function (){
-            header.forEach(function (item) {
-                item.classList.toggle("faq_spoiler-active");
-            });
-            
-            // поиск нескольких контейнеров с содержимым спойлера
-            var spoilerContent = item.querySelectorAll("[data-name='spoiler-content']");
-            spoilerContent.forEach(function (item) {
-                // добавление/удаление класса при клике
-                item.classList.toggle("faq_spoiler-body");
-                if(item.classList.contains('faq_spoiler-body')) {
-                    item.style.maxHeight = item.scrollHeight + "px";
-                } else {
-                    item.style.maxHeight = 0 + "px";
-                };
-                // сравнение массивов для закрытия открытых спойлеров
-                var allSpoilersContent = document.querySelectorAll("[data-name='spoiler-content']");
-                var notActiveSpoilers = Array.from(allSpoilersContent).filter(i => !Array.from(spoilerContent).includes(i));
-                notActiveSpoilers.forEach(item => {
-                    item.classList.remove("faq_spoiler-body");
-                    item.style.maxHeight = 0 + "px";
-                });
-                var allSpoilersHeader = document.querySelectorAll("[data-name='spoiler-title']");
-                notActiveSpoilers = Array.from(allSpoilersHeader).filter(i => !Array.from(header).includes(i));
-                notActiveSpoilers.forEach(item => {
-                    item.classList.remove("faq_spoiler-active");
-                });
-            });
-        });
-    });
-});
-// var h = document.getElementById('menu_bottom').clientHeight;
-// function headerClick() {
-//   this.nextElementSibling.classList.toggle("faq_spoiler-body");
-// }
-window.addEventListener('resize', (e) => {
-    chartModalOpen()
-  });
-window.onload = chartModalOpen();
-
-function chartModalOpen(){
-    document.querySelector('.chart_play-button').style.top = document.querySelector('.chart_text_container').offsetHeight + parseFloat(window.getComputedStyle(document.querySelector('.chart_text_container'), null).marginTop) + "px";
-    // let circle1 = document.querySelector('#chart_circle1');
-    // let circle2 = document.querySelector('#chart_circle2');
-    // let circle3 = document.querySelector('#chart_circle3');
-    // let circle4 = document.querySelector('#chart_circle4');
-    function getCoords(elem) {
-        let box = elem.getBoundingClientRect();
-        return {
-            top: box.top + window.pageYOffset,
-            right: box.right + window.pageXOffset,
-            bottom: box.bottom + window.pageYOffset,
-            left: box.left + window.pageXOffset,
-            width: box.width ,
-        };
-    }
-    function modalCoordinates (item, circle, modal) {
-        item.addEventListener("mouseover",function() {
-            modal.style.opacity = 1;
-         });
-         
-         item.addEventListener("mouseout",function() {
-            modal.style.opacity = 0;
-         });
-        modal.style.left = circle.left - modal.offsetWidth / 2 + circle.width / 2 + "px";
-        // координаты top для абсолютного позиционирования минуc высота хедера
-        modal.style.top = circle.top - modal.offsetHeight * 1.2 - document.querySelector('.header').offsetHeight + "px";
-    };
-    for (let i = 1; i < 5; i++){
-        window['circle' + i] = document.querySelector('#chart_circle'+i);      
-        let xa = getCoords(window['circle' + i] = document.querySelector('#chart_circle'+i));
-        let item = window['circle' + i] = document.querySelector('#chart_circle'+i);
-        modalCoordinates (item, xa, window['circle' + i] = document.querySelector('.chart_modal'+i));
-    };
-
-    
-};

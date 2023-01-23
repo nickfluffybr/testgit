@@ -1,3 +1,8 @@
+.spinner {
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+}
 .h3_text {
     font-family: 'Quicksand';
     font-style: normal;
